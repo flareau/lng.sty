@@ -1,0 +1,144 @@
+\documentclass{article}
+\usepackage{lng}
+\usepackage{multicol}
+\usepackage[moderate]{savetrees}
+
+\author{François Lareau\\OLST, Université de Montréal}
+\title{Macros \LaTeX\ pour linguistes}
+
+\begin{document}
+\maketitle
+
+\section{Conventions d'écriture}
+
+\begin{itemize}
+	\item Agrammatical: \ungr\form{Il n'a pas le fait}
+	\item Douteux: \doubt\form{Il s'est en allé}
+	\item Sémantiquement bizarre: \infel\form{Tu manges une patate très douce}
+	\item Forme linguistique: \form{Il pleuvait}
+	\item Concept: \conc{pluie}
+	\item Sens: \sem{pluie}
+	\item Signe linguistique: \sign{pleuv--}\comb\sign{--ait}
+	\item Lexie: \lex{pleuvoir}
+	\item Grammème: \lex{pleuvoir}.\gramm{imp}.\gramm{3sg}
+	\item Locution: \idiom{\lex{tomber des cordes}}, \form{Il \idiom{tombait des cordes}}
+	\item Partie du discours: \lex{souper}\pos{n}
+	\item Présupposé: \sem{\presup{X ayant autorité sur Y} X dit\ldots}
+	\item Numéro de lexie: \lex{pleuvoir}\sensenum{I.1}
+	\item Numéro de vocable: \lex{table}\vocnum{1}
+	\item Nom de relation: \lex{il} est l'actant \rel{I} de \lex{pleuvoir}
+	\item Relations étiquetées: \form{Il \lrel{suj} pleuvait \rrel{mod} souvent}
+	\item Slash dans les exemples: \form{Il pleuvait\slashup neigeait\slashup grêlait}
+\end{itemize}
+
+
+\section{Exemples linguistiques}
+
+\ex. \label{ex:silence}\form{Il règne un très lourd silence dans la pièce.} \hfill(source)\\
+		 \smaller\lex{il}\pos{expl} \lex{régner}.\gramm{prés}.\gramm{3sg} \lex{un}.\gramm{masc}.\gramm{sg} \lex{très} \lex{lourd}.\gramm{masc}.\gramm{sg} \lex{silence}.\gramm{sg} \lex{dans} \lex{le}.\gramm{fem}.\gramm{sg} \lex{pièce}.\gramm{sg} \\
+		 \sem{The room is dead silent}
+
+
+\section{Définitions lexicographiques}
+
+\lexdef{$x$ risque\sensenum{II.2a} de $y$-er}{$y$ est fort probable \presup{$y(x)$ étant non souhaitable pour l'énonciateur ou pour $x$}}
+
+
+\newpage
+\section{Fonctions lexicales}
+
+\begin{multicols}{3}
+\begin{itemize}
+	\item \Syn, \Q\Syn
+	\item \Anti, \Non
+	\item \Conv{i}
+	\item \Contr
+	\item \Gener
+	\item \Figur
+	\item \So, \Vo, \Ao, \Advo
+	\item \Claus
+	\item \Pred
+	\item \Si{i}
+	\item \Equip, \CapLF
+	\item \Sinstr, \Smed, \Smod, \Sloc, \Sres
+	\item \Ai{i}
+	\item \Able{i}, \Qual{i}
+	\item \Advi{i}
+	\item \Sing, \Mult
+	\item \Imper
+	\item \Perf, \Imperf
+	\item \Result{i}
+	\item \Germ, \Culm
+	\item \Epit, \Redun
+	\item \Magn, \Ver, \Bon
+	\item \Plus, \Minus
+	\item \Degrad
+	\item \Locin, \Locad, \Locab
+	\item \Instr
+	\item \Propt, \Propti{i}
+	\item \Copul
+	\item \Oper{i}, \Func{i}, \Labor{ij}
+	\item \Real{i}, \Fact{i}, \Labreal{ij}
+	\item \Prepar, \Prox
+	\item \Incep, \Fin, \Cont
+	\item \Obstr, \Stop, \Excess
+	\item \Caus, \Causi{i}
+	\item \Liqu, \Liqui{i}
+	\item \Perm, \Permi{i}
+	\item \Son
+	\item \Manif
+	\item \Involv
+	\item \Sympt{i}
+	\item \lexfn{NonStd}
+	\item \Q\Anti\Magn+\Anti\Ver
+\end{itemize}
+\end{multicols}
+
+
+
+
+\section{Structures de traits}
+
+\lexentry{départ}{
+	\begin{avm}
+		\[{}	pdd & N \\
+					sens & \sem{partir} \\
+					genre & masc \\
+					tr &	\[{}	I & \[{} arg & 1 \\ pdd & N \\ prép & \lex{de}\] \] \]
+	\end{avm}
+}
+
+
+\section{Alphabet phonétique international}
+
+\begin{itemize}
+	\item Voyelles: \textipa{[iIeEa yY\o\oe{} @ uUoOA \~e\~E\~a\~\o\~\oe{}\~O\~A:]}
+	\item Consonnes: \textipa{[pt\t*{ts}\t*{tS}kbd\t*{dz}\t*{dZ}g fsSvzZ mn\ng{} lrKR]}
+	\item Semi-consonnes: \textipa{[j4w]}
+\end{itemize}
+
+\section{Arbres syntaxiques}
+
+\subsection{Dépendances}
+
+\begin{dependency}[theme=simple,segmented edge]
+	\begin{deptext}
+		Ma \& nouvelle \& gardienne \& étudie \& le \& droit \& à \& l \& UdeM \\
+	\end{deptext}
+	\deproot{4}{RACINE}
+	\depedge{3}{1}{dét}
+	\depedge{3}{2}{mod}
+	\depedge{4}{3}{suj}
+	\depedge{4}{6}{dir}
+	\depedge{6}{5}{dét}
+	\depedge{4}{7}{obl}
+	\depedge{7}{9}{cprép}
+	\depedge{9}{8}{dét}
+\end{dependency}
+
+
+\subsection{Constituants}
+
+\Tree [.Ph [.SN [.N Il ] ] [.SV [.V règne ] [.SN [.Dét un ] [.SA [.SAdv [.Adv très ] ] [.Adj lourd ] ] [.N silence ] ] [.SP [.P dans ] [.SN [.Dét la ] [.N pièce ] ] ] ] ]
+
+\end{document}

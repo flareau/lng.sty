@@ -1,0 +1,207 @@
+% =============================================
+% Macros for linguistics
+% François Lareau <first.lastname@umontreal.ca>
+% OLST, Université de Montréal
+% =============================================
+
+\ProvidesPackage{lng}[2023/02/02 Macros for linguistics]
+
+\RequirePackage{linguex}         % For linguistic examples and glosses
+\RequirePackage{avm}             % For HPSG, LFG, etc.
+\RequirePackage{tabularx}        % For lexicographic definitions
+\RequirePackage{tipa}            % For IPA transcriptions
+\RequirePackage{tikz-qtree}      % For phrase-structure trees
+\RequirePackage{tikz-dependency} % For labeled dependency trees
+\RequirePackage{tree-dvips}      % For complex graphs with links between nodes
+\RequirePackage[inference]{semantic}	% For CCG proofs
+\RequirePackage{relsize}         % Relative font sizes
+\RequirePackage{xspace}          % Smart space at the end of a macro
+\RequirePackage{MnSymbol}        % Math symbols
+\RequirePackage{amsmath}         % Math macros
+\RequirePackage{fixltx2e}				 % For superscripts and subscripts without math mode that won't upset hyperref
+
+
+
+% Writing conventions
+% ==========================================
+
+% Grammaticality judgements
+\newcommand{\judgment}[1]{\textsuperscript{\textup{#1}}}
+\newcommand{\ungr}{\judgment{*}} % Ungrammatical: \ungr\form{He do not it}
+\newcommand{\doubt}{\judgment{?}} % Doubtful: \doubt\form{intense taste}
+\newcommand{\infel}{\judgment{\#}} % Infelicitous sentence: \infel\form{example}
+
+% Linguistic entities
+\newcommand{\conc}[1]{\texttt{\MakeUppercase{#1}}}		% Concept: \conc{RAIN}
+\newcommand{\form}[1]{\textit{#1}} 										% Linguistic form: \form{the dog}
+\newcommand{\sign}[1]{\textbf{#1}} 										% Name of a linguistic sign: the suffix \sign{-ga}
+\newcommand{\sem}[1]{`#1'} 														% Semantic quotes: \sem{dog}
+\newcommand{\gramm}[1]{{\smaller\textsc{\MakeLowercase{#1}}}} % Grammeme: \gramm{pres} or \gramm{PRES}
+\newcommand{\lex}[1]{\textsc{\MakeLowercase{#1}}} 		% Lexical unit: \lex{dog} or \lex{DOG}
+\newcommand{\idiom}[1]{\textopencorner #1\textcorner} % Full idiom: \idiom{kick the bucket}
+\newcommand{\presup}[1]{\ensuremath{|}[#1]\ensuremath{|}} % Presupposed part of a definition: \presup{X has authority on Y} X says...
+\newcommand{\pos}[1]{\textsubscript{\textup{\textsc{\MakeLowercase{#1}}}}} % Part of speech: \lex{export}\pos{n}
+\newcommand{\sensenum}[1]{{\smaller[3]\textbf{#1}}}			% Sense number: \lex{dog}\sensenum{I.1}
+\newcommand{\vocnum}[1]{\textsuperscript{\smaller\fontfamily{phv}\selectfont #1}} % Numbers for homophonic vocables: \lex{table}\vocnum{1}
+
+% Relations
+\newcommand{\rel}[1]{{\smaller\textbf{\textup{#1}}}} 					% Name of a linguistic relation: Actant \rel{I} of...
+\newcommand{\lrel}[1]{\ensuremath{\leftarrow}\rel{#1}\ensuremath{-}}  % Named relation to the left: dog\lrel{1}leave
+\newcommand{\rrel}[1]{\ensuremath{-}\rel{#1}\ensuremath{\rightarrow}} % Named relation to the right: leave\rrel{2}house
+
+% Etc.
+\newcommand{\comb}{ \ensuremath{\bigoplus} } % Sign combination
+\newcommand{\slashup}{\textup{\slash}} % Slash in upright style within slanted examples
+
+
+% Lexical entries
+% ==========================================
+% Lexicographic definition
+\newcommand{\lexdef}[2]{
+	\begin{tabularx}{\linewidth}{@{}l@{ = }X@{}}
+	\sem{#1} & \sem{#2}
+	\end{tabularx}
+}
+
+% As a feature structure
+\newlength{\lngalignlen}
+\newcommand{\lexentry}[2]{ % name, avm
+	\settowidth{\lngalignlen}{#2}
+	\bigskip
+	\begin{minipage}{\lngalignlen}
+	\lex{#1} \\[3pt]
+	\vspace{-1em}#2
+	\end{minipage}
+}
+
+
+% PUG
+% ==========================================
+\newcommand{\fn}[1]{\ensuremath{#1}}
+\newcommand{\polB}{\ensuremath{\filledsquare}\xspace}
+\newcommand{\polW}{\ensuremath{\smallsquare}\xspace}
+\newcommand{\polG}{{\color{gray}\ensuremath{\filledsquare}}\xspace}
+\newcommand{\product}{\ensuremath{\times}\xspace}
+\newcommand{\unif}{\ensuremath{\sqcup}\xspace}
+\newcommand{\fail}{\ensuremath{\bot}\xspace}
+\newcommand{\Gfont}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\Gsem}{$\Gfont{G}$\textsubscript{sem}\xspace}
+\newcommand{\Gsynt}{$\Gfont{G}$\textsubscript{synt}\xspace}
+\newcommand{\Gtree}{$\Gfont{G}$\textsubscript{tree}\xspace}
+\newcommand{\Garbre}{$\Gfont{G}$\textsubscript{arbre}\xspace}
+\newcommand{\Gmorph}{$\mathcal{G}$\textsubscript{morph}\xspace}
+\newcommand{\Gphon}{$\Gfont{G}$\textsubscript{phon}\xspace}
+\newcommand{\Iss}{$\Gfont{I}$\textsubscript{sem-synt}\xspace}
+\newcommand{\Ism}{$\Gfont{I}$\textsubscript{synt-morph}\xspace}
+\newcommand{\Imp}{$\Gfont{I}$\textsubscript{morph-phon}\xspace}
+\newcommand{\semnode}{\ensuremath{node^{sem}}\xspace}
+\newcommand{\semedge}{\ensuremath{edge^{sem}}\xspace}
+\newcommand{\syntnode}{\ensuremath{node^{synt}}\xspace}
+\newcommand{\syntedge}{\ensuremath{edge^{synt}}\xspace}
+\newcommand{\syntgramm}{\ensuremath{grammeme}\xspace}
+\newcommand{\corr}{\ensuremath{correspondence}\xspace}
+\newcommand{\psem}{\fn{p_{sem}}\xspace}
+\newcommand{\psynt}{\fn{p_{synt}}\xspace}
+\newcommand{\ptree}{\fn{p_{tree}}\xspace}
+\newcommand{\psemsynt}{\fn{p_{sem-synt}}\xspace}
+
+
+% LFG
+% ==========================================
+\renewcommand{\sigma}{\ensuremath{\upsigma}}
+\newcommand{\lfgrule}[2]{\lfgnode{#1  \ra}{} #2}
+\newcommand{\lfgnode}[2]{{\sc\small\begin{tabular}[t]{@{}c@{}}\rm\normalsize #1 \\ #2\end{tabular}}}
+\newcommand{\lfghead}{\ua\ = \da}
+\newcommand{\opt}[1]{\ensuremath{\left(#1\right)}}
+\newcommand{\ra}{\ensuremath{\rightarrow}}
+\newcommand{\ua}{\ensuremath{\uparrow}}
+\newcommand{\da}{\ensuremath{\downarrow}}
+\newcommand{\inset}{\ensuremath{\in}}
+\newcommand{\blank}{\ensuremath{\quad}}
+\newcommand{\lab}{\ensuremath{\langle}}
+\newcommand{\rab}{\ensuremath{\rangle}}
+\newcommand{\attr}[1]{\textsc{#1}}
+\avmoptions{sorted,inactive}
+\avmfont{\sc}
+\avmvalfont{\rm}
+\avmsortfont{\footnotesize\it}
+
+
+% MTT's lexical functions
+% ==========================================
+\newcommand{\kw}{\ensuremath{\sim}}	% Keyword symbol (~)
+\newcommand{\lexfn}[1]{\texttt{#1}} % Name of a lexical function: \lexfn{Oper$_1$}
+\newcommand{\Q}{\lexfn{Q}}          % Approximate functions: \Q\Syn = QSyn
+\newcommand{\Syn}{\lexfn{Syn}}
+\newcommand{\Anti}{\lexfn{Anti}}
+\newcommand{\Non}{\lexfn{Non}}
+\newcommand{\Conv}[1]{\lexfn{Conv$_{#1}$}}
+\newcommand{\Contr}{\lexfn{Contr}}
+\newcommand{\Gener}{\lexfn{Gener}}
+\newcommand{\Figur}{\lexfn{Figur}}
+\newcommand{\So}{\lexfn{S$_{0}$}}
+\newcommand{\Vo}{\lexfn{V$_{0}$}}
+\newcommand{\Ao}{\lexfn{A$_{0}$}}
+\newcommand{\Advo}{\lexfn{Adv$_{0}$}}
+\newcommand{\Claus}{\lexfn{Claus}}
+\newcommand{\Pred}{\lexfn{Pred}}
+\newcommand{\Si}[1]{\lexfn{S$_{#1}$}}
+\newcommand{\Equip}{\lexfn{Equip}}
+\newcommand{\CapLF}{\lexfn{Cap}}
+\newcommand{\Sinstr}{\lexfn{S$_{\text{instr}}$}}
+\newcommand{\Smed}{\lexfn{S$_{\text{med}}$}}
+\newcommand{\Smod}{\lexfn{S$_{\text{mod}}$}}
+\newcommand{\Sloc}{\lexfn{S$_{\text{loc}}$}}
+\newcommand{\Sres}{\lexfn{S$_{\text{res}}$}}
+\newcommand{\Ai}[1]{\lexfn{A$_{#1}$}}
+\newcommand{\Able}[1]{\lexfn{Able$_{#1}$}}
+\newcommand{\Qual}[1]{\lexfn{Qual$_{#1}$}}
+\newcommand{\Advi}[1]{\lexfn{Adv$_{#1}$}}
+\newcommand{\Sing}{\lexfn{Sing}}
+\newcommand{\Mult}{\lexfn{Mult}}
+\newcommand{\Imper}{\lexfn{Imper}}
+\newcommand{\Perf}{\lexfn{Perf}}
+\newcommand{\Imperf}{\lexfn{Imperf}}
+\newcommand{\Result}[1]{\lexfn{Result$_{#1}$}}
+\newcommand{\Germ}{\lexfn{Germ}}
+\newcommand{\Culm}{\lexfn{Culm}}
+\newcommand{\Epit}{\lexfn{Epit}}
+\newcommand{\Redun}{\lexfn{Redun}}
+\newcommand{\Magn}{\lexfn{Magn}}
+\newcommand{\Ver}{\lexfn{Ver}}
+\newcommand{\Bon}{\lexfn{Bon}}
+\newcommand{\Plus}{\lexfn{Plus}}
+\newcommand{\Minus}{\lexfn{Minus}}
+\newcommand{\Degrad}{\lexfn{Degrad}}
+\newcommand{\Loc}[1]{\lexfn{Loc$_{\text{#1}}$}}
+\newcommand{\Locin}{\Loc{in}}
+\newcommand{\Locad}{\Loc{ad}}
+\newcommand{\Locab}{\Loc{ab}}
+\newcommand{\Instr}{\lexfn{Instr}}
+\newcommand{\Propt}{\lexfn{Propt}}
+\newcommand{\Propti}[1]{\lexfn{Propt$_{#1}$}}
+\newcommand{\Copul}{\lexfn{Copul}}
+\newcommand{\Oper}[1]{\lexfn{Oper$_{#1}$}}
+\newcommand{\Func}[1]{\lexfn{Func$_{#1}$}}
+\newcommand{\Labor}[1]{\lexfn{Labor$_{#1}$}}
+\newcommand{\Real}[1]{\lexfn{Real$_{#1}$}}
+\newcommand{\Fact}[1]{\lexfn{Fact$_{#1}$}}
+\newcommand{\Labreal}[1]{\lexfn{Labreal$_{#1}$}}
+\newcommand{\Prepar}{\lexfn{Prepar}}
+\newcommand{\Incep}{\lexfn{Incep}}
+\newcommand{\Fin}{\lexfn{Fin}}
+\newcommand{\Cont}{\lexfn{Cont}}
+\newcommand{\Prox}{\lexfn{Prox}}
+\newcommand{\Obstr}{\lexfn{Obstr}}
+\newcommand{\Stop}{\lexfn{Stop}}
+\newcommand{\Excess}{\lexfn{Excess}}
+\newcommand{\Caus}{\lexfn{Caus}}
+\newcommand{\Liqu}{\lexfn{Liqu}}
+\newcommand{\Perm}{\lexfn{Perm}}
+\newcommand{\Causi}[1]{\lexfn{Caus$_{#1}$}}
+\newcommand{\Liqui}[1]{\lexfn{Liqu$_{#1}$}}
+\newcommand{\Permi}[1]{\lexfn{Perm$_{#1}$}}
+\newcommand{\Son}{\lexfn{Son}}
+\newcommand{\Manif}{\lexfn{Manif}}
+\newcommand{\Involv}{\lexfn{Involv}}
+\newcommand{\Sympt}[1]{\lexfn{Sympt$_{#1}$}}
