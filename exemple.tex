@@ -99,14 +99,16 @@
 
 \section{Structures de traits}
 
-\lexentry{départ}{
-	\begin{avm}
-		\[{}	pdd & N \\
-					sens & \sem{partir} \\
-					genre & masc \\
-					tr &	\[{}	I & \[{} arg & 1 \\ pdd & N \\ prép & \lex{de}\] \] \]
-	\end{avm}
+\avmdefinestyle{plain}{attributes=\normalfont,values=\normalfont,types=\normalfont}
+
+\lex{départ} = 
+\avm[style=plain]{
+	[ pdd & N \\
+	  sens & \sem{partir} \\
+	  genre & \gramm{masc} \\
+	  tr & [ \rel{I} & [ arg & \rel{1} \\ pdd & N \\ prép & \lex{de}]]]
 }
+
 
 
 \section{Alphabet phonétique international}

@@ -7,7 +7,7 @@
 \ProvidesPackage{lng}[2023/02/02 Macros for linguistics]
 
 \RequirePackage{linguex}         % For linguistic examples and glosses
-\RequirePackage{avm}             % For HPSG, LFG, etc.
+\RequirePackage{langsci-avm}     % For HPSG, LFG, etc.
 \RequirePackage{tabularx}        % For lexicographic definitions
 \RequirePackage{tipa}            % For IPA transcriptions
 \RequirePackage{tikz-qtree}      % For phrase-structure trees
@@ -18,8 +18,6 @@
 \RequirePackage{xspace}          % Smart space at the end of a macro
 \RequirePackage{MnSymbol}        % Math symbols
 \RequirePackage{amsmath}         % Math macros
-\RequirePackage{fixltx2e}				 % For superscripts and subscripts without math mode that won't upset hyperref
-
 
 
 % Writing conventions
@@ -55,24 +53,12 @@
 \newcommand{\slashup}{\textup{\slash}} % Slash in upright style within slanted examples
 
 
-% Lexical entries
-% ==========================================
 % Lexicographic definition
+% ==========================================
 \newcommand{\lexdef}[2]{
 	\begin{tabularx}{\linewidth}{@{}l@{ = }X@{}}
 	\sem{#1} & \sem{#2}
 	\end{tabularx}
-}
-
-% As a feature structure
-\newlength{\lngalignlen}
-\newcommand{\lexentry}[2]{ % name, avm
-	\settowidth{\lngalignlen}{#2}
-	\bigskip
-	\begin{minipage}{\lngalignlen}
-	\lex{#1} \\[3pt]
-	\vspace{-1em}#2
-	\end{minipage}
 }
 
 
@@ -122,10 +108,6 @@
 \newcommand{\lab}{\ensuremath{\langle}}
 \newcommand{\rab}{\ensuremath{\rangle}}
 \newcommand{\attr}[1]{\textsc{#1}}
-\avmoptions{sorted,inactive}
-\avmfont{\sc}
-\avmvalfont{\rm}
-\avmsortfont{\footnotesize\it}
 
 
 % MTT's lexical functions
