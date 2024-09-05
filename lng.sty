@@ -18,6 +18,7 @@
 \RequirePackage{xspace}          % Smart space at the end of a macro
 \RequirePackage{MnSymbol}        % Math symbols
 \RequirePackage{amsmath}         % Math macros
+\RequirePackage{textcomp}        % Math symbols in text mode
 
 
 % Writing conventions
@@ -32,9 +33,10 @@
 
 % Linguistic entities
 \newcommand{\conc}[1]{\texttt{\MakeUppercase{#1}}}		% Concept: \conc{RAIN}
-\newcommand{\form}[1]{\textit{#1}} 										% Linguistic form: \form{the dog}
-\newcommand{\sign}[1]{\textbf{#1}} 										% Name of a linguistic sign: the suffix \sign{-ga}
-\newcommand{\sem}[1]{`#1'} 														% Semantic quotes: \sem{dog}
+\newcommand{\graphm}[1]{\textlangle #1\textrangle{}} 	% Linguistic form: \form{the dog}
+\newcommand{\sign}[1]{\textit{#1}} 						% Name of a linguistic sign: the suffix \sign{-ga}
+\newcommand{\form}[1]{\sign{#1}} 						% For backward compatibility. Use \sign or \graphm instead.
+\newcommand{\sem}[1]{`#1'} 								% Semantic quotes: \sem{dog}
 \newcommand{\gramm}[1]{{\smaller\textsc{\MakeLowercase{#1}}}} % Grammeme: \gramm{pres} or \gramm{PRES}
 \newcommand{\lex}[1]{\textsc{\MakeLowercase{#1}}} 		% Lexical unit: \lex{dog} or \lex{DOG}
 \newcommand{\idiom}[1]{\textopencorner #1\textcorner} % Full idiom: \idiom{kick the bucket}
