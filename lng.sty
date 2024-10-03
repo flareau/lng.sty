@@ -19,6 +19,7 @@
 \RequirePackage{MnSymbol}        % Math symbols
 \RequirePackage{amsmath}         % Math macros
 \RequirePackage{textcomp}        % Math symbols in text mode
+\xspaceaddexceptions{( ) [ ] + - \kw \lexfn}
 
 
 % Writing conventions
@@ -115,7 +116,7 @@
 % MTT's lexical functions
 % ==========================================
 \newcommand{\kw}{\ensuremath{\sim}}	% Keyword symbol (~)
-\newcommand{\lexfn}[1]{\texttt{#1}} % Name of a lexical function: \lexfn{Oper$_1$}
+\newcommand{\lexfn}[1]{\texttt{#1}\xspace} % Name of a lexical function: \lexfn{Oper$_1$}
 \newcommand{\Q}{\lexfn{Q}}          % Approximate functions: \Q\Syn = QSyn
 \newcommand{\Syn}{\lexfn{Syn}}
 \newcommand{\Anti}{\lexfn{Anti}}
